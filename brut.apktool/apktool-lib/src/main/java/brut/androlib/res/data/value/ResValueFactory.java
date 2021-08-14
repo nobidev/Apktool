@@ -112,6 +112,12 @@ public class ResValueFactory {
             return new ResAttr(parentVal, 0, null, null, null);
         }
 
+        for (String item: ResTypeSpec.RES_TYPE_NAME_STYLES_EXTRA) {
+            if (item.equals(resTypeName)) {
+                return new ResAttr(parentVal, 0, null, null, null);
+            }
+        }
+
         throw new AndrolibException("unsupported res type name for bags. Found: " + resTypeName);
     }
 
