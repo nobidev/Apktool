@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -324,11 +324,8 @@ public final class ResXmlPatcher {
         DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
         // Not using the parse(File) method on purpose, so that we can control when
         // to close it. Somehow parse(File) does not seem to close the file in all cases.
-        FileInputStream inputStream = new FileInputStream(file);
-        try {
-        	return docBuilder.parse(inputStream);
-        } finally {
-        	inputStream.close();
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            return docBuilder.parse(inputStream);
         }
     }
 

@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,6 +18,7 @@ package brut.androlib.res.src;
 
 import brut.androlib.*;
 import brut.androlib.aapt2.BuildAndDecodeTest;
+import brut.androlib.options.BuildOptions;
 import brut.common.BrutException;
 import brut.directory.ExtFile;
 import brut.util.OS;
@@ -44,11 +45,11 @@ public class DexStaticFieldValueTest extends BaseTest {
         LOGGER.info("Unpacking issue2543...");
         TestUtils.copyResourceDir(BuildAndDecodeTest.class, "decode/issue2543/", sTestOrigDir);
 
-        ApkOptions apkOptions = new ApkOptions();
+        BuildOptions buildOptions = new BuildOptions();
 
         LOGGER.info("Building issue2543.apk...");
         File testApk = new File(sTmpDir, "issue2543.apk");
-        new Androlib(apkOptions).build(sTestOrigDir, testApk);
+        new Androlib(buildOptions).build(sTestOrigDir, testApk);
 
         LOGGER.info("Decoding issue2543.apk...");
         ApkDecoder apkDecoder = new ApkDecoder(testApk);

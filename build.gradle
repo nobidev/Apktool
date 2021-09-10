@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,12 +17,6 @@ import java.nio.charset.StandardCharsets
  */
 buildscript {
     ext {
-        year = '2010'
-        brut = 'Ryszard Wiśniewski'
-        brutEmail = 'brut.alll@gmail.com'
-        ibot = 'Connor Tumbleson'
-        ibotEmail = 'connor.tumbleson@gmail.com'
-
         depends = [
                 baksmali       : 'org.smali:baksmali:2.5.2',
                 commons_cli    : 'commons-cli:commons-cli:1.4',
@@ -40,26 +34,25 @@ buildscript {
 
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath "gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0"
+        classpath "gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.16.1"
     }
-}
-
-plugins {
-    id 'com.github.hierynomus.license' version '0.16.1'
 }
 
 apply from: 'gradle/functions.gradle'
 
-version = '2.5.1'
+version = '2.6.1'
 def suffix = 'SNAPSHOT'
 
 defaultTasks 'build', 'shadowJar', 'proguard'
 
 allprojects {
     apply plugin: 'java'
-    apply plugin: 'license'
+    apply plugin: 'com.github.hierynomus.license'
+
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
@@ -70,6 +63,13 @@ allprojects {
         include "**/*.java"
         mapping {
             java = 'SLASHSTAR_STYLE'
+        }
+        ext {
+            year = '2010'
+            brut = 'Ryszard Wiśniewski'
+            brutEmail = 'brut.alll@gmail.com'
+            ibot = 'Connor Tumbleson'
+            ibotEmail = 'connor.tumbleson@gmail.com'
         }
         strictCheck true
     }

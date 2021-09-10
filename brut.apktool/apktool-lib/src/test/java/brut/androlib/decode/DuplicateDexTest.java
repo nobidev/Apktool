@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package brut.androlib.decode;
 
 import brut.androlib.*;
+import brut.androlib.options.BuildOptions;
 import brut.common.BrutException;
 import brut.directory.ExtFile;
 import brut.util.OS;
@@ -53,8 +54,8 @@ public class DuplicateDexTest extends BaseTest {
         apkDecoder.decode();
 
         LOGGER.info("Building duplicatedex.apk...");
-        ApkOptions apkOptions = new ApkOptions();
-        new Androlib(apkOptions).build(sTestNewDir, testApk);
+        BuildOptions buildOptions = new BuildOptions();
+        new Androlib(buildOptions).build(sTestNewDir, testApk);
     }
 
     @Test
@@ -68,8 +69,8 @@ public class DuplicateDexTest extends BaseTest {
         apkDecoder.decode();
 
         LOGGER.info("Building duplicatedex.apk...");
-        ApkOptions apkOptions = new ApkOptions();
-        new Androlib(apkOptions).build(sTestNewDir, testApk);
+        BuildOptions buildOptions = new BuildOptions();
+        new Androlib(buildOptions).build(sTestNewDir, testApk);
     }
 
 }

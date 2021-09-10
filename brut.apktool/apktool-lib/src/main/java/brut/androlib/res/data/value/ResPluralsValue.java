@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,8 +32,8 @@ public class ResPluralsValue extends ResBagValue implements
         super(parent);
 
         mItems = new ResScalarValue[6];
-        for (int i = 0; i < items.length; i++) {
-            mItems[items[i].m1 - BAG_KEY_PLURALS_START] = items[i].m2;
+        for (Duo<Integer, ResScalarValue> item : items) {
+            mItems[item.m1 - BAG_KEY_PLURALS_START] = item.m2;
         }
     }
 

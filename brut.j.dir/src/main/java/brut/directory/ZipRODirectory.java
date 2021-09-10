@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -27,8 +27,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class ZipRODirectory extends AbstractDirectory {
-    private ZipFile mZipFile;
-    private String mPath;
+    private final ZipFile mZipFile;
+    private final String mPath;
 
     public ZipRODirectory(String zipFileName) throws DirectoryException {
         this(zipFileName, "");
@@ -129,21 +129,21 @@ public class ZipRODirectory extends AbstractDirectory {
     }
 
     private void loadAll() {
-        mFiles = new LinkedHashSet<String>();
-        mDirs = new LinkedHashMap<String, AbstractDirectory>();
-        
+        mFiles = new LinkedHashSet<>();
+        mDirs = new LinkedHashMap<>();
+
         int prefixLen = getPath().length();
         Enumeration<? extends ZipEntry> entries = getZipFile().entries();
         while (entries.hasMoreElements()) {
             ZipEntry entry = entries.nextElement();
             String name = entry.getName();
-            
+
             if (name.equals(getPath()) || ! name.startsWith(getPath()) || name.contains(".." + separator)) {
                 continue;
             }
-            
+
             String subname = name.substring(prefixLen);
-            
+
             int pos = subname.indexOf(separator);
             if (pos == -1) {
                 if (! entry.isDirectory()) {
@@ -153,10 +153,10 @@ public class ZipRODirectory extends AbstractDirectory {
             } else {
                 subname = subname.substring(0, pos);
             }
-            
+
             if (! mDirs.containsKey(subname)) {
                 AbstractDirectory dir = new ZipRODirectory(getZipFile(), getPath() + subname + separator);
-                mDirs.put(subname, dir);                
+                mDirs.put(subname, dir);
             }
         }
     }

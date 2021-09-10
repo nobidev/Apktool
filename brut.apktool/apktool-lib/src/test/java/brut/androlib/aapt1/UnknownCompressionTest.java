@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,6 +17,7 @@
 package brut.androlib.aapt1;
 
 import brut.androlib.*;
+import brut.androlib.options.BuildOptions;
 import brut.directory.ExtFile;
 import brut.common.BrutException;
 import brut.util.OS;
@@ -39,8 +40,8 @@ public class UnknownCompressionTest extends BaseTest {
         TestUtils.copyResourceDir(UnknownCompressionTest.class, "aapt1/unknown_compression/", sTmpDir);
 
         String apk = "deflated_unknowns.apk";
-        ApkOptions apkOptions = new ApkOptions();
-        apkOptions.frameworkFolderLocation = sTmpDir.getAbsolutePath();
+        BuildOptions buildOptions = new BuildOptions();
+        buildOptions.frameworkFolderLocation = sTmpDir.getAbsolutePath();
 
         sTestOrigDir = new ExtFile(sTmpDir, apk);
 
@@ -51,7 +52,7 @@ public class UnknownCompressionTest extends BaseTest {
 
         // build deflated_unknowns
         ExtFile clientApkFolder = new ExtFile(sTestOrigDir.getAbsolutePath() + ".out");
-        new Androlib(apkOptions).build(clientApkFolder, null);
+        new Androlib(buildOptions).build(clientApkFolder, null);
         sTestNewDir = new ExtFile(clientApkFolder, "dist" + File.separator + apk);
     }
 
@@ -79,7 +80,7 @@ public class UnknownCompressionTest extends BaseTest {
         // Check that control = rebuilt (both stored)
         // Add extra check for checking = 0 to enforce check for stored just in case control breaks
         assertEquals(control, rebuilt);
-        assertEquals(new Integer(0), rebuilt);
+        assertEquals(Integer.valueOf(0), rebuilt);
     }
 
     @Test
@@ -88,7 +89,7 @@ public class UnknownCompressionTest extends BaseTest {
         Integer rebuilt = sTestNewDir.getDirectory().getCompressionLevel("test.json");
 
         assertEquals(control, rebuilt);
-        assertEquals(new Integer(8), rebuilt);
+        assertEquals(Integer.valueOf(8), rebuilt);
     }
 
     @Test
@@ -97,6 +98,6 @@ public class UnknownCompressionTest extends BaseTest {
         Integer rebuilt = sTestNewDir.getDirectory().getCompressionLevel("950x150.png");
 
         assertEquals(control, rebuilt);
-        assertEquals(new Integer(8), rebuilt);
+        assertEquals(Integer.valueOf(8), rebuilt);
     }
 }

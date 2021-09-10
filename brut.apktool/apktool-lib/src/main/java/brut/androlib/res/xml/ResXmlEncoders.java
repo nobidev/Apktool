@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -102,14 +102,12 @@ public final class ResXmlEncoders {
                 wasSpace = false;
                 switch (c) {
                     case '\\':
+                    case '"':
                         out.append('\\');
                         break;
                     case '\'':
                     case '\n':
                         enclose = true;
-                        break;
-                    case '"':
-                        out.append('\\');
                         break;
                     case '<':
                         isInStyleTag = true;
@@ -154,7 +152,7 @@ public final class ResXmlEncoders {
         int pos = 0;
         int count = 0;
         for (Integer sub : subs) {
-            out.append(str.substring(pos, ++sub)).append(++count).append('$');
+            out.append(str, pos, ++sub).append(++count).append('$');
             pos = sub;
         }
         out.append(str.substring(pos));

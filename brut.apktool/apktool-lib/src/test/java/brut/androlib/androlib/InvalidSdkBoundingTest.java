@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,11 +18,9 @@ package brut.androlib.androlib;
 
 import brut.androlib.BaseTest;
 import brut.androlib.res.AndrolibResources;
+import org.junit.Test;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.junit.*;
-
 import static org.junit.Assert.assertEquals;
 
 public class InvalidSdkBoundingTest extends BaseTest {
@@ -75,6 +73,16 @@ public class InvalidSdkBoundingTest extends BaseTest {
         assertEquals("25", androlibResources.checkTargetSdkVersionBounds());
     }
 
+    @Test
+    public void checkForShortHandSTag() {
+        AndrolibResources androlibResources = new AndrolibResources();
+
+        Map<String, String> sdkInfo = new LinkedHashMap<>();
+        sdkInfo.put("targetSdkVersion", "S");
+
+        androlibResources.setSdkInfo(sdkInfo);
+        assertEquals("31", androlibResources.checkTargetSdkVersionBounds());
+    }
 
     @Test
     public void checkForShortHandSdkTag() {
@@ -92,7 +100,7 @@ public class InvalidSdkBoundingTest extends BaseTest {
         AndrolibResources androlibResources = new AndrolibResources();
 
         Map<String, String> sdkInfo = new LinkedHashMap<>();
-        sdkInfo.put("targetSdkVersion", "S");
+        sdkInfo.put("targetSdkVersion", "T");
 
         androlibResources.setSdkInfo(sdkInfo);
         assertEquals("10000", androlibResources.checkTargetSdkVersionBounds());

@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -165,12 +165,10 @@ public class ApkDecoder {
 
             mAndrolib.decodeRawFiles(mApkFile, outDir, mDecodeAssets);
             mAndrolib.decodeUnknownFiles(mApkFile, outDir);
-            mUncompressedFiles = new ArrayList<String>();
+            mUncompressedFiles = new ArrayList<>();
             mAndrolib.recordUncompressedFiles(mApkFile, mUncompressedFiles);
             mAndrolib.writeOriginalFiles(mApkFile, outDir);
             writeMetaFile();
-        } catch (Exception ex) {
-            throw ex;
         } finally {
             try {
                 mApkFile.close();
@@ -227,7 +225,7 @@ public class ApkDecoder {
     }
 
     public void setFrameworkTag(String tag) {
-        mAndrolib.apkOptions.frameworkTag = tag;
+        mAndrolib.buildOptions.frameworkTag = tag;
     }
 
     public void setKeepBrokenResources(boolean keepBrokenResources) {
@@ -235,7 +233,7 @@ public class ApkDecoder {
     }
 
     public void setFrameworkDir(String dir) {
-        mAndrolib.apkOptions.frameworkFolderLocation = dir;
+        mAndrolib.buildOptions.frameworkFolderLocation = dir;
     }
 
     public ResTable getResTable() throws AndrolibException {
@@ -357,8 +355,8 @@ public class ApkDecoder {
         meta.usesFramework = new UsesFramework();
         meta.usesFramework.ids = Arrays.asList(ids);
 
-        if (mAndrolib.apkOptions.frameworkTag != null) {
-            meta.usesFramework.tag = mAndrolib.apkOptions.frameworkTag;
+        if (mAndrolib.buildOptions.frameworkTag != null) {
+            meta.usesFramework.tag = mAndrolib.buildOptions.frameworkTag;
         }
     }
 

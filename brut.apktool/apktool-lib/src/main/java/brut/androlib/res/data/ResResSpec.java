@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -30,7 +30,7 @@ public class ResResSpec {
     private final String mName;
     private final ResPackage mPackage;
     private final ResTypeSpec mType;
-    private final Map<ResConfigFlags, ResResource> mResources = new LinkedHashMap<ResConfigFlags, ResResource>();
+    private final Map<ResConfigFlags, ResResource> mResources = new LinkedHashMap<>();
 
     public ResResSpec(ResID id, String name, ResPackage pkg, ResTypeSpec type) {
         this.mId = id;
@@ -38,18 +38,18 @@ public class ResResSpec {
 
         ResResSpec resResSpec = type.getResSpecUnsafe(name);
         if (resResSpec != null) {
-            cleanName = String.format("APKTOOL_DUPLICATE_%s_%s", type.toString(), id.toString());
+            cleanName = String.format("APKTOOL_DUPLICATE_%s_%s", type, id.toString());
         } else {
             cleanName = ((name == null || name.isEmpty()) ? ("APKTOOL_DUMMYVAL_" + id.toString()) : name);
         }
-        
+
         this.mName = cleanName;
         this.mPackage = pkg;
         this.mType = type;
     }
 
     public Set<ResResource> listResources() {
-        return new LinkedHashSet<ResResource>(mResources.values());
+        return new LinkedHashSet<>(mResources.values());
     }
 
     public ResResource getResource(ResType config) throws AndrolibException {

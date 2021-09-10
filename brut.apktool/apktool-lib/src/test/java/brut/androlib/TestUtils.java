@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *       https://www.apache.org/licenses/LICENSE-2.0
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
  */
 package brut.androlib;
 
+import brut.androlib.options.BuildOptions;
 import brut.androlib.res.AndrolibResources;
 import brut.common.BrutException;
 import brut.directory.DirUtil;
@@ -45,7 +46,7 @@ public abstract class TestUtils {
 
             int eventType;
             String key = null;
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, String> map = new HashMap<>();
             while ((eventType = xpp.next()) != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
@@ -78,14 +79,14 @@ public abstract class TestUtils {
         }
     }
 
-    public static void copyResourceDir(Class class_, String dirPath, File out) throws BrutException {
+    public static void copyResourceDir(Class<?> class_, String dirPath, File out) throws BrutException {
         if (!out.exists()) {
             out.mkdirs();
         }
         copyResourceDir(class_, dirPath, new FileDirectory(out));
     }
 
-    public static void copyResourceDir(Class class_, String dirPath, Directory out) throws BrutException {
+    public static void copyResourceDir(Class<?> class_, String dirPath, Directory out) throws BrutException {
         if (class_ == null) {
             class_ = Class.class;
         }
@@ -137,7 +138,7 @@ public abstract class TestUtils {
 
     static File getFrameworkDir() throws AndrolibException {
         AndrolibResources androlibResources = new AndrolibResources();
-        androlibResources.apkOptions = new ApkOptions();
+        androlibResources.buildOptions = new BuildOptions();
         return androlibResources.getFrameworkDir();
     }
 
